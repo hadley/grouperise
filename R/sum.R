@@ -15,10 +15,27 @@ group_sum <- function(x, g) {
   .Call(grouped_sum_dbl, x, g, attr(g, "n"))
 }
 
+#' Grouping tools
+#'
+#' @keywords internal
+#' @export
 vec_group <- function(x) {
+  if (inherits(x, "group")) {
+    return(x)
+  }
+
   unique <- vec_unique(x)
   id <- vec_match(x, unique)
-  attr(id, "n") <- vec_size(unique)
 
-  id
+  new_group(id, vec_size(unique))
+}
+
+#' @export
+#' @rdname vec_group
+new_group <- function(x, n) {
+  structure(
+    x,
+    n = n,
+    class = "group"
+  )
 }

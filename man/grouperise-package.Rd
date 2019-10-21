@@ -8,6 +8,14 @@
 \description{
 What the package does (one paragraph).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/hadley/grouperise}
+  \item Report bugs at \url{https://github.com/hadley/grouperise/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Hadley Wickham \email{hadley@rstudio.com}
 
