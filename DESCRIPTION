@@ -16,3 +16,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports: 
     vctrs
+URL: https://github.com/hadley/grouperise
+BugReports: https://github.com/hadley/grouperise/issues
