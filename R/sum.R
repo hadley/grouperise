@@ -6,14 +6,18 @@
 #' @examples
 #' group_sum(mtcars$cyl, mtcars$vs)
 #' group_sum(mtcars$cyl, mtcars[c("vs", "am")])
-group_sum <- function(x, g) {
+group_sum1 <- function(x, g) {
   g <- vec_group(g)
-  if (vec_size(x) != vec_size(g)) {
-    stop("`x` and `g` must be same size", call.  = FALSE)
-  }
-
-  .Call(grouped_sum_dbl, x, g, attr(g, "n"))
+  .Call(grouped_sum1, x, g, attr(g, "n"))
 }
+
+group_sum_rle1 <- function(x, g) {
+  g <- vec_group_rle(g)
+  .Call(grouped_sum_rle1, x, g$x, g$l, attr(g, "n"))
+}
+
+# Grouping ----------------------------------------------------------------
+
 
 #' Grouping tools
 #'
@@ -39,3 +43,25 @@ new_group <- function(x, n) {
     class = "group"
   )
 }
+
+vec_group_rle <- function(x) {
+  if (inherits(x, "group_rle")) {
+    return(x)
+  }
+
+  unique <- vec_unique(x)
+  id <- vec_match(x, unique)
+  rle <- rle(id)
+
+  new_group_rle(rle$values, rle$lengths, vec_size(unique))
+}
+
+new_group_rle <- function(x, l, n) {
+  structure(
+    list(x = x, l = l),
+    n = n,
+    class = "group_rle"
+  )
+}
+
+
