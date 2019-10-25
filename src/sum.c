@@ -56,11 +56,17 @@ SEXP grouped_sum_rle1(SEXP x, SEXP g, SEXP l, SEXP m_) {
         sum += p_x[i++];
       }
     } else if (n2 > 3) {
-      sum += p_x[i++];
+      for (int j2 = 0; j2 < n2; ++j2) {
+        sum += p_x[i++];
+      }
     } else if (n2 > 2) {
-      sum += p_x[i++];
+      for (int j2 = 0; j2 < n2; ++j2) {
+        sum += p_x[i++];
+      }
     } else if (n2 > 1) {
-      sum += p_x[i++];
+      for (int j2 = 0; j2 < n2; ++j2) {
+        sum += p_x[i++];
+      }
     } else {
       sum += p_x[i++];
     }

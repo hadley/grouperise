@@ -12,7 +12,7 @@ group_sum1 <- function(x, g) {
 }
 
 group_sum_rle1 <- function(x, g) {
-  g <- vec_group_rle(g)
+  g <- group_rle(g)
   .Call(grouped_sum_rle1, x, g$x, g$l, attr(g, "n"))
 }
 
@@ -44,16 +44,18 @@ new_group <- function(x, n) {
   )
 }
 
-vec_group_rle <- function(x) {
+group_rle <- function(x) {
   if (inherits(x, "group_rle")) {
     return(x)
   }
 
-  unique <- vec_unique(x)
-  id <- vec_match(x, unique)
-  rle <- rle(id)
+  rle <- vec_group_rle(x)
 
-  new_group_rle(rle$values, rle$lengths, vec_size(unique))
+  group <- field(rle, "group")
+  length <- field(rle, "length")
+  n <- attr(rle, "n")
+
+  new_group_rle(group, length, n)
 }
 
 new_group_rle <- function(x, l, n) {
