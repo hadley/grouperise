@@ -4,38 +4,16 @@
 #' @param g A vector defining grouping levels
 #' @export
 #' @examples
-#' group_sum(mtcars$cyl, mtcars$vs)
-#' group_sum(mtcars$cyl, mtcars[c("vs", "am")])
-group_sum <- function(x, g) {
-  g <- vec_group(g)
-  if (vec_size(x) != vec_size(g)) {
-    stop("`x` and `g` must be same size", call.  = FALSE)
-  }
-
-  .Call(grouped_sum_dbl, x, g, attr(g, "n"))
-}
-
-#' Grouping tools
-#'
-#' @keywords internal
-#' @export
-vec_group <- function(x) {
-  if (inherits(x, "group")) {
-    return(x)
-  }
-
-  unique <- vec_unique(x)
-  id <- vec_match(x, unique)
-
-  new_group(id, vec_size(unique))
+#' group_sum_id(mtcars$cyl, mtcars$vs)
+#' group_sum_id(mtcars$cyl, mtcars[c("vs", "am")])
+group_sum_id <- function(x, g) {
+  g <- as_group_id(g)
+  .Call(grouped_sum_id, x, g, attr(g, "n"))
 }
 
 #' @export
-#' @rdname vec_group
-new_group <- function(x, n) {
-  structure(
-    x,
-    n = n,
-    class = "group"
-  )
+#' @rdname group_sum_rle
+group_sum_rle <- function(x, g) {
+  g <- as_group_rle(g)
+  .Call(grouped_sum_rle, x, g$group, g$length, attr(g, "n"))
 }

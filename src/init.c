@@ -4,10 +4,12 @@
 #include <R_ext/Rdynload.h>
 
 /* .Call calls */
-extern SEXP grouped_sum_dbl(SEXP, SEXP, SEXP);
+extern SEXP grouped_sum_id(SEXP, SEXP, SEXP);
+extern SEXP grouped_sum_rle(SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
-    {"grouped_sum_dbl", (DL_FUNC) &grouped_sum_dbl, 3},
+    {"grouped_sum_id", (DL_FUNC) &grouped_sum_id, 3},
+    {"grouped_sum_rle", (DL_FUNC) &grouped_sum_rle, 4},
     {NULL, NULL, 0}
 };
 

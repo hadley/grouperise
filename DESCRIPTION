@@ -13,8 +13,10 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 Imports: 
-    vctrs
+    vctrs (>= 0.2.0.9007)
 URL: https://github.com/hadley/grouperise
 BugReports: https://github.com/hadley/grouperise/issues
+Remotes:  
+    r-lib/vctrs
